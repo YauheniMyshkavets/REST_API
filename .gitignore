@@ -1,0 +1,16 @@
+.idea/*
+*.iml
+**/*.iml
+
+*.class
+target/*
+build/*
+test-output/*
+
+# Package Files
+*.war
+*.jar
+*.ear
+
+#ignore screenshots
+*.png
