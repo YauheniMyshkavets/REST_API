@@ -1,21 +1,21 @@
+import controllers.UserController;
+import models.User;
 import org.springframework.web.client.RestTemplate;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class APITests {
-    private RestTemplate restTemplate;
-
-    private final String API_BASE = "https://api.github.com";
+   private UserController userController;
 
     @BeforeMethod
     public void start() {
-        restTemplate = new RestTemplate();
+        userController = new UserController();
     }
 
     @Test
     public void testUserInfoResponse() {
-        User user = restTemplate.getForObject(API_BASE + "/users/EvgenyMyshkovets", User.class);
+        User user = userController.getUserByUsername("EvgenyMyshkovets");
         //System.out.println(user);
 
         //User localUser = restTemplate.postForObject();
@@ -25,8 +25,7 @@ public class APITests {
 
     @Test
     public void testFollowers() {
-       User[] followers = restTemplate.getForObject(API_BASE + "/users/EvgenyMyshkovets/followers",
-                User[].class);
+       User[] followers = userController.getFollowersByUsername("EvgenyMyshkovets");
 
         Assert.assertTrue(followers.length == 0);
     }
